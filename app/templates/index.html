@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hunar Setu | Verified skills. Trusted jobs.</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              teal: {
+                850: "#133a41",
+                900: "#0e2b31",
+                950: "#091c20",
+              },
+              amber: {
+                450: "#f59e0b",
+                550: "#d97706",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body
+    class="bg-[#f7f5ef] text-gray-900 min-h-screen flex flex-col antialiased"
+  >
+    <header
+      class="bg-[#0e2b31] text-white border-b-4 border-amber-500 shadow-md sticky top-0 z-40"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-teal-950 font-black text-xl shadow-lg border border-amber-300"
+          >
+            HS
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1
+                class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2"
+              >
+                Hunar Setu
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hidden lg:flex items-center gap-4 text-xs bg-teal-950/70 py-1.5 px-4 rounded-full border border-teal-800/80"
+        >
+          <div>
+            <span class="text-gray-400">Verified Jobs:</span>
+            <strong id="stat-verified-jobs" class="text-emerald-400 font-mono"
+              >0</strong
+            >
+          </div>
+          <div class="w-px h-3 bg-teal-700"></div>
+          <div>
+            <span class="text-gray-400">Scams Blocked:</span>
+            <strong id="stat-scams-blocked" class="text-red-400 font-mono"
+              >0</strong
+            >
+          </div>
+          <div class="w-px h-3 bg-teal-700"></div>
+          <div>
+            <span class="text-gray-400">Hiring Speed:</span>
+            <strong id="stat-avg-hire" class="text-amber-300 font-mono"
+              >1.8 days</strong
+            >
+          </div>
+          <div class="w-px h-3 bg-teal-700"></div>
+          <div>
+            <span class="text-gray-400">Retention Boost:</span>
+            <strong id="stat-retention" class="text-emerald-300 font-mono"
+              >+74%</strong
+            >
+          </div>
+        </div>
+
+        <!-- Language & Voice Bar -->
+        <div class="flex items-center gap-3">
+          <!-- Voice Wave Activity Indicator -->
+          <div
+            class="voice-wave-indicator hidden items-center gap-1 bg-amber-400/20 px-2 py-1 rounded-full border border-amber-400/40"
+          >
+            <span
+              class="w-1.5 h-3 bg-amber-400 animate-pulse rounded-full"
+            ></span>
+            <span
+              class="w-1.5 h-4 bg-amber-400 animate-pulse rounded-full delay-75"
+            ></span>
+            <span
+              class="w-1.5 h-2 bg-amber-400 animate-pulse rounded-full delay-150"
+            ></span>
+            <span class="text-[10px] text-amber-300 font-bold uppercase ml-1"
+              >Voice Agent Speaking</span
+            >
+          </div>
+
+          <!-- Language Selector (Slide 6, 7) -->
+          <div
+            class="flex items-center gap-1.5 bg-teal-900/80 p-1 rounded-lg border border-teal-700 text-xs"
+          >
+            <span class="text-gray-400 pl-1 text-[11px]">🌐</span>
+            <select
+              id="lang-selector"
+              class="bg-transparent text-white font-semibold focus:outline-none cursor-pointer pr-1"
+            >
+              <option value="hi" class="bg-[#0e2b31] text-white">
+                हिंदी (Hindi)
+              </option>
+              <option value="bn" class="bg-[#0e2b31] text-white">
+                বাংলা (Bengali)
+              </option>
+              <option value="en" class="bg-[#0e2b31] text-white">
+                English
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN NAVIGATION TABS -->
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-teal-800/80 py-2 overflow-x-auto"
+      >
+        <nav class="flex items-center gap-1.5 min-w-max">
+          <button class="tab-btn active" data-tab="demo">
+            <span>⚡</span>
+            <span>5-Step Demo Path</span>
+          </button>
+          <button class="tab-btn" data-tab="worker">
+            <span>👷</span>
+            <span>Worker Portal</span>
+          </button>
+          <button class="tab-btn" data-tab="employer">
+            <span>🏢</span>
+            <span>Employer Portal</span>
+          </button>
+          <button class="tab-btn" data-tab="agents">
+            <span>🤖</span>
+            <span>Multi-Agent Console</span>
+          </button>
+          <button class="tab-btn" data-tab="trust">
+            <span>🛡️</span>
+            <span>Trust & Safety</span>
+            <span
+              id="human-review-count"
+              class="hidden ml-1 px-1.5 py-0.2 bg-amber-500 text-teal-950 rounded-full text-[10px] font-black"
+              >0</span
+            >
+          </button>
+          <button class="tab-btn" data-tab="retention">
+            <span>🔄</span>
+            <span>30-60-90 Day Retention</span>
+          </button>
+          <button class="tab-btn" data-tab="field">
+            <span>📊</span>
+            <span>Field Plan & Pilot</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN BODY CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <!-- HERO PROBLEM & SOLUTION STATS -->
+      <section
+        class="bg-gradient-to-r from-[#0e2b31] via-[#143c44] to-[#0e2b31] text-white rounded-2xl p-6 sm:p-8 mb-6 shadow-xl border border-teal-800 relative overflow-hidden"
+      >
+        <div
+          class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none"
+        >
+          <div class="w-72 h-72 rounded-full border-8 border-amber-400"></div>
+        </div>
+        <div class="max-w-3xl">
+          <h2
+            class="text-2xl sm:text-3xl font-black leading-tight text-white mb-2"
+            data-i18n="hero_title"
+          >
+            Verified skills. Trusted jobs.
+          </h2>
+          <p
+            class="text-sm sm:text-base text-gray-200 leading-relaxed mb-6"
+            data-i18n="hero_subtitle"
+          >
+            Rural youth cannot find work that fits, and small employers cannot
+            find them. Hunar Setu deploys four specialized agents under one
+            orchestrator to solve hiring delay, early exits, and fraud.
+          </p>
+
+          <!-- 3 Problem Comparison Cards -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-teal-700/60 text-xs"
+          >
+            <div class="bg-teal-950/60 p-3 rounded-xl border border-teal-800">
+              <div class="text-amber-400 font-bold text-sm">
+                2–3 mo → 48 Hours
+              </div>
+              <div class="text-gray-300 font-medium mt-0.5">
+                Hiring Latency Reduced
+              </div>
+              <div class="text-gray-400 text-[11px] mt-1">
+                Eliminating slow word of mouth, agent commissions, and WhatsApp
+                forwards.
+              </div>
+            </div>
+            <div class="bg-teal-950/60 p-3 rounded-xl border border-teal-800">
+              <div class="text-emerald-400 font-bold text-sm">
+                40–50% → &lt;12% Exits
+              </div>
+              <div class="text-gray-300 font-medium mt-0.5">
+                Early Exits Prevented
+              </div>
+              <div class="text-gray-400 text-[11px] mt-1">
+                Realistic video skill verification + 30/60/90-day retention
+                follow-ups.
+              </div>
+            </div>
+            <div class="bg-teal-950/60 p-3 rounded-xl border border-teal-800">
+              <div class="text-red-400 font-bold text-sm">Zero Fraud</div>
+              <div class="text-gray-300 font-medium mt-0.5">
+                Worker Protection Guard
+              </div>
+              <div class="text-gray-400 text-[11px] mt-1">
+                100% pre-screened listings, statutory wage parity, and privacy
+                consent before sharing.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-demo" class="tab-content">
+        <div
+          class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-200 mb-6"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3
+                class="font-black text-gray-900 text-lg sm:text-xl flex items-center gap-2"
+              >
+                <span>One End-to-End Demo Path</span>
+              </h3>
+              <p class="text-xs text-gray-500">
+                Walk through the live multi-agent execution pipeline from job
+                posting to consent.
+              </p>
+            </div>
+            <button
+              onclick="
+                window.voiceEngine.speak(
+                  'Welcome to Hunar Setu. Follow the five steps: employer posts, listing verified, skill video scored, job matched, and worker consents.',
+                )
+              "
+              class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1.5"
+            >
+              <svg
+                class="w-4 h-4 text-teal-800"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                />
+              </svg>
+              <span>Play Overview</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
+            <button
+              onclick="setDemoStep(1)"
+              id="step-indicator-1"
+              class="p-3 rounded-xl border border-gray-200 text-left transition text-xs font-semibold hover:border-amber-400 ring-4 ring-amber-400 bg-teal-900 text-white"
+            >
+              <div class="step-number mb-1.5">1</div>
+              <div class="font-bold text-sm">Employer posts</div>
+              <div class="text-[11px] opacity-80">By message / form</div>
+            </button>
+
+            <button
+              onclick="setDemoStep(2)"
+              id="step-indicator-2"
+              class="p-3 rounded-xl border border-gray-200 text-left transition text-xs font-semibold hover:border-amber-400 bg-gray-50 text-gray-700"
+            >
+              <div class="step-number mb-1.5">2</div>
+              <div class="font-bold text-sm">Listing verified</div>
+              <div class="text-[11px] opacity-80">Before workers see it</div>
+            </button>
+
+            <button
+              onclick="setDemoStep(3)"
+              id="step-indicator-3"
+              class="p-3 rounded-xl border border-gray-200 text-left transition text-xs font-semibold hover:border-amber-400 bg-gray-50 text-gray-700"
+            >
+              <div class="step-number mb-1.5">3</div>
+              <div class="font-bold text-sm">Skill video</div>
+              <div class="text-[11px] opacity-80">Worker shows a task</div>
+            </button>
+
+            <button
+              onclick="setDemoStep(4)"
+              id="step-indicator-4"
+              class="p-3 rounded-xl border border-gray-200 text-left transition text-xs font-semibold hover:border-amber-400 bg-gray-50 text-gray-700"
+            >
+              <div class="step-number mb-1.5">4</div>
+              <div class="font-bold text-sm">Job matched</div>
+              <div class="text-[11px] opacity-80">Skill, distance, wage</div>
+            </button>
+
+            <button
+              onclick="setDemoStep(5)"
+              id="step-indicator-5"
+              class="p-3 rounded-xl border border-gray-200 text-left transition text-xs font-semibold hover:border-amber-400 bg-gray-50 text-gray-700"
+            >
+              <div class="step-number mb-1.5">5</div>
+              <div class="font-bold text-sm">Worker consents</div>
+              <div class="text-[11px] opacity-80">Then details shared</div>
+            </button>
+          </div>
+        </div>
+
+        <div id="demo-step-1" class="demo-step-view">
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200"
+          >
+            <div
+              class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-gray-100"
+            >
+              <div>
+                <span
+                  class="text-xs font-bold text-teal-800 uppercase tracking-wider"
+                  >Step 1 of 5</span
+                >
+                <h3 class="text-xl font-black text-gray-900 mt-0.5">
+                  Employer Posts a Job (By message or structured input)
+                </h3>
+                <p class="text-xs text-gray-500">
+                  Small business owners can submit via simple form or natural
+                  language message simulation.
+                </p>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500 font-medium"
+                  >Quick Presets:</span
+                >
+                <button
+                  onclick="prefillDemoJob('tractor')"
+                  class="px-2.5 py-1 text-xs bg-amber-100 hover:bg-amber-200 text-teal-950 font-bold rounded-lg border border-amber-300"
+                >
+                  🚜 Tractor Hydraulics
+                </button>
+                <button
+                  onclick="prefillDemoJob('solar')"
+                  class="px-2.5 py-1 text-xs bg-blue-100 hover:bg-blue-200 text-blue-900 font-bold rounded-lg border border-blue-300"
+                >
+                  ☀️ Solar Inverter
+                </button>
+                <button
+                  onclick="handleSimulateScam()"
+                  class="px-2.5 py-1 text-xs bg-red-100 hover:bg-red-200 text-red-900 font-bold rounded-lg border border-red-300"
+                >
+                  ⚠️ Test Advance-Fee Scam
+                </button>
+              </div>
+            </div>
+
+            <form
+              id="demo-post-job-form"
+              onsubmit="
+                event.preventDefault();
+                handleDemoPostJob();
+              "
+              class="space-y-4"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Employer / Owner Name</label
+                  >
+                  <input
+                    type="text"
+                    name="employer_name"
+                    value="Ramesh Pal"
+                    required
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Business / Workshop Name</label
+                  >
+                  <input
+                    type="text"
+                    name="business_name"
+                    value="Kisan Agro Engineering Workshop"
+                    required
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Contact Phone</label
+                  >
+                  <input
+                    type="text"
+                    name="phone"
+                    value="+91 98321 44510"
+                    required
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >District (Bengal / Bihar / UP)</label
+                  >
+                  <select
+                    name="district"
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none bg-white"
+                  >
+                    {% for d in districts %}
+                    <option value="{{ d }}">{{ d }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Trade Category</label
+                  >
+                  <select
+                    name="trade_category"
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none bg-white"
+                  >
+                    {% for t in trades %}
+                    <option value="{{ t }}">{{ t }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Job Title</label
+                  >
+                  <input
+                    type="text"
+                    name="job_title"
+                    value="Lead Tractor Hydraulics Mechanic"
+                    required
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Monthly Wage Offered (₹)</label
+                  >
+                  <input
+                    type="number"
+                    name="wage_offered"
+                    value="18500"
+                    required
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1"
+                    >Experience Required (Months)</label
+                  >
+                  <input
+                    type="number"
+                    name="experience_months"
+                    value="12"
+                    class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                  />
+                </div>
+                <div class="flex items-center gap-4 pt-5">
+                  <label
+                    class="inline-flex items-center gap-1.5 text-xs text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      name="lodging_provided"
+                      checked
+                      class="rounded text-teal-800 focus:ring-teal-700"
+                    />
+                    <span class="font-semibold">🏠 Free Lodging</span>
+                  </label>
+                  <label
+                    class="inline-flex items-center gap-1.5 text-xs text-gray-700 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      name="food_provided"
+                      class="rounded text-teal-800 focus:ring-teal-700"
+                    />
+                    <span class="font-semibold">🍲 Free Meals</span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1"
+                  >Job Description & Tasks</label
+                >
+                <textarea
+                  name="job_description"
+                  rows="2"
+                  class="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-700 focus:outline-none"
+                >
+Overhaul Mahindra & Sonalika hydraulic pumps, spool valves, and rotavators before harvest season. Lodging provided on premise.</textarea
+                >
+              </div>
+
+              <div class="pt-2 flex justify-end">
+                <button
+                  type="submit"
+                  class="px-6 py-2.5 bg-teal-800 hover:bg-teal-900 text-white font-bold rounded-xl text-xs shadow-md flex items-center gap-2"
+                >
+                  <span>Submit Job to Orchestrator →</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div id="demo-step-2" class="demo-step-view hidden">
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200"
+          >
+            <div
+              class="pb-3 mb-3 border-b border-gray-100 flex items-center justify-between"
+            >
+              <div>
+                <span
+                  class="text-xs font-bold text-teal-800 uppercase tracking-wider"
+                  >Step 2 of 5</span
+                >
+                <h3 class="text-xl font-black text-gray-900 mt-0.5">
+                  Listing Verified by Listing Agent (Before workers see it)
+                </h3>
+                <p class="text-xs text-gray-500">
+                  Automated audit checks employer identity, minimum wage
+                  benchmarks, and predatory fee patterns.
+                </p>
+              </div>
+              <button
+                onclick="handleSimulateScam()"
+                class="text-xs bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg font-bold"
+              >
+                Test Fraud Block Demonstration
+              </button>
+            </div>
+
+            <div id="step-2-verification-card">
+              <div class="p-6 text-center text-gray-400 text-xs">
+                Submitting or selecting a listing will invoke the Listing Agent
+                verification engine.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="demo-step-3" class="demo-step-view hidden">
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200"
+          >
+            <div
+              class="pb-3 mb-4 border-b border-gray-100 flex items-center justify-between"
+            >
+              <div>
+                <span
+                  class="text-xs font-bold text-teal-800 uppercase tracking-wider"
+                  >Step 3 of 5</span
+                >
+                <h3 class="text-xl font-black text-gray-900 mt-0.5">
+                  Skill Video (Worker shows a task)
+                </h3>
+                <p class="text-xs text-gray-500">
+                  Skill Agent scores technical execution, PPE/safety, tool
+                  handling, and precision with strict bias control.
+                </p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded border border-emerald-300"
+                >
+                  Fixed Rubric · Bias Control
+                </span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div class="lg:col-span-7">
+                <div
+                  class="relative bg-black rounded-xl overflow-hidden shadow-inner border border-gray-800"
+                >
+                  <canvas
+                    id="skillVideoCanvas"
+                    width="640"
+                    height="360"
+                    class="w-full h-auto block"
+                  ></canvas>
+
+                  <div
+                    class="absolute bottom-2 left-2 right-2 bg-black/70 backdrop-blur-sm p-2 rounded-lg flex items-center justify-between text-white text-xs"
+                  >
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"
+                      ></span>
+                      <span class="font-mono text-[11px]">00:45 / REC</span>
+                    </div>
+                    <div class="text-[11px] text-amber-300 font-semibold">
+                      Live Kinematic Tool Tracking
+                    </div>
+                    <button
+                      onclick="state.videoSimulator.startSimulation()"
+                      class="text-xs bg-teal-800 hover:bg-teal-700 px-2 py-0.5 rounded"
+                    >
+                      Replay Frame
+                    </button>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-xs">
+                  <div>
+                    <label class="block font-bold text-gray-700 mb-1"
+                      >Trade Demonstration</label
+                    >
+                    <select
+                      id="demo-trade-select"
+                      class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg focus:outline-none bg-white"
+                    >
+                      {% for t in trades %}
+                      <option value="{{ t }}">{{ t }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-gray-700 mb-1"
+                      >Demonstrated Task</label
+                    >
+                    <input
+                      type="text"
+                      id="demo-task-name"
+                      value="Hydraulic Spool Valve Overhaul & High-Pressure Bleed"
+                      class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg focus:outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="lg:col-span-5 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-bold text-gray-900 text-sm">
+                      Fixed Standardized Rubrics
+                    </h4>
+                    <span class="text-[11px] text-gray-500"
+                      >4 Axes (25 pts each)</span
+                    >
+                  </div>
+                  <div id="trade-rubric-steps" class="space-y-1.5 mb-3"></div>
+
+                  <div
+                    class="bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-xs mb-3"
+                  >
+                    <label class="block font-bold text-gray-700 mb-1"
+                      >Simulate Visual Lighting Conditions:</label
+                    >
+                    <select
+                      id="demo-lighting-select"
+                      class="w-full px-2 py-1 text-xs border border-gray-300 rounded bg-white"
+                    >
+                      <option value="GOOD">
+                        Good Lighting (Confidence 96% → Auto-Passed)
+                      </option>
+                      <option value="DIM">
+                        Dim Lighting / Obscured (Confidence 68% → Escalates to
+                        Human Review)
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <button
+                    onclick="handleAssessSkillVideo()"
+                    class="w-full py-2.5 bg-teal-800 hover:bg-teal-900 text-white font-bold rounded-xl text-xs shadow flex items-center justify-center gap-2"
+                  >
+                    <svg
+                      class="w-4 h-4 text-amber-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      />
+                    </svg>
+                    <span>Score Video with Skill Agent</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="step-3-skill-result"></div>
+          </div>
+        </div>
+
+        <div id="demo-step-4" class="demo-step-view hidden">
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200"
+          >
+            <div
+              class="pb-3 mb-4 border-b border-gray-100 flex items-center justify-between"
+            >
+              <div>
+                <span
+                  class="text-xs font-bold text-teal-800 uppercase tracking-wider"
+                  >Step 4 of 5</span
+                >
+                <h3 class="text-xl font-black text-gray-900 mt-0.5">
+                  Job Matched (Skill, distance, wage)
+                </h3>
+                <p class="text-xs text-gray-500">
+                  Matching Agent ranks verified listings and explains each match
+                  transparently in the worker's mother tongue.
+                </p>
+              </div>
+              <button
+                onclick="handleRunMatching()"
+                class="text-xs bg-teal-100 hover:bg-teal-200 text-teal-900 px-3 py-1.5 rounded-lg font-bold"
+              >
+                ↻ Re-calculate Matches
+              </button>
+            </div>
+
+            <div id="step-4-matches-list" class="space-y-4">
+              <div class="p-6 text-center text-gray-400 text-xs">
+                Matching Agent ranking jobs on skill, distance, and wage...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="demo-step-5" class="demo-step-view hidden">
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200"
+          >
+            <div
+              class="pb-3 mb-4 border-b border-gray-100 flex items-center justify-between"
+            >
+              <div>
+                <span
+                  class="text-xs font-bold text-teal-800 uppercase tracking-wider"
+                  >Step 5 of 5</span
+                >
+                <h3 class="text-xl font-black text-gray-900 mt-0.5">
+                  Worker Consents (Then details are shared)
+                </h3>
+                <p class="text-xs text-gray-500">
+                  Consent Agent enforces worker privacy: identity and phone are
+                  unlocked only after worker authorization.
+                </p>
+              </div>
+              <span
+                class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-300"
+              >
+                Worker Privacy Guarantee
+              </span>
+            </div>
+
+            <div id="step-5-consent-card">
+              <div class="p-6 text-center text-gray-400 text-xs">
+                Select a matched job from Step 4 to initiate worker consent
+                protocol.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-worker" class="tab-content hidden">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+        >
+          <div
+            class="flex items-center justify-between pb-4 border-b border-gray-100 mb-4"
+          >
+            <div>
+              <h3 class="text-xl font-black text-gray-900">
+                Rural Youth & Worker Skill Passport
+              </h3>
+              <p class="text-xs text-gray-500">
+                Verified trade competencies, privacy guard, and job matches with
+                zero registration fees.
+              </p>
+            </div>
+            <button
+              onclick="
+                switchTab('demo');
+                setDemoStep(3);
+              "
+              class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-teal-950 font-bold rounded-lg text-xs shadow"
+            >
+              + Record New Skill Video
+            </button>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            id="workers-card-list"
+          ></div>
+        </div>
+      </section>
+
+      <section id="view-employer" class="tab-content hidden">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+        >
+          <div
+            class="flex items-center justify-between pb-4 border-b border-gray-100 mb-4"
+          >
+            <div>
+              <h3 class="text-xl font-black text-gray-900">
+                Small Employer Hiring Portal
+              </h3>
+              <p class="text-xs text-gray-500">
+                Pre-screened listings, verified candidate skill demonstrations,
+                and consent-unlocked direct hiring.
+              </p>
+            </div>
+            <button
+              onclick="
+                switchTab('demo');
+                setDemoStep(1);
+              "
+              class="px-4 py-2 bg-teal-800 hover:bg-teal-900 text-white font-bold rounded-lg text-xs shadow"
+            >
+              + Post New Opening
+            </button>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            id="employer-jobs-list"
+          ></div>
+        </div>
+      </section>
+
+      <section id="view-agents" class="tab-content hidden">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+        >
+          <div
+            class="pb-4 mb-4 border-b border-gray-100 flex items-center justify-between"
+          >
+            <div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded border border-teal-300"
+                  >Slide 4 Architecture</span
+                >
+                <h3 class="text-xl font-black text-gray-900">
+                  Four Agents, One Orchestrator
+                </h3>
+              </div>
+              <p class="text-xs text-gray-500">
+                Multi-agent routing, specialized tools, and continuous feedback
+                loop.
+              </p>
+            </div>
+            <span
+              class="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full border border-emerald-300 flex items-center gap-1.5"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+              ></span>
+              All 5 Agents Active
+            </span>
+          </div>
+
+          <div
+            class="bg-teal-900 text-white p-4 rounded-xl shadow-md mb-6 border border-teal-800"
+          >
+            <div class="flex items-center justify-between">
+              <div>
+                <span
+                  class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold"
+                  >Central Coordinator</span
+                >
+                <h4 class="text-base font-bold">Orchestrator Agent</h4>
+                <p class="text-xs text-gray-300 mt-0.5">
+                  Routes tasks, calls tools, monitors latency, and flags cases
+                  for human review.
+                </p>
+              </div>
+              <span
+                class="px-3 py-1 rounded bg-teal-800 text-amber-300 font-mono text-xs font-bold border border-teal-700"
+              >
+                State: READY
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+          >
+            <div
+              class="p-4 rounded-xl border border-gray-200 bg-gray-50/80 hover:bg-white transition shadow-sm"
+            >
+              <div class="text-xs font-bold text-teal-800 uppercase mb-1">
+                Agent 1
+              </div>
+              <h5 class="font-bold text-gray-900 text-sm">Listing Agent</h5>
+              <p class="text-xs text-gray-600 mt-1">
+                Checks employer identity, wage standards, and scam patterns.
+              </p>
+              <div class="mt-3 text-[11px] text-emerald-700 font-semibold">
+                ✓ 100% Pre-Screening
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl border border-gray-200 bg-gray-50/80 hover:bg-white transition shadow-sm"
+            >
+              <div class="text-xs font-bold text-teal-800 uppercase mb-1">
+                Agent 2
+              </div>
+              <h5 class="font-bold text-gray-900 text-sm">Skill Agent</h5>
+              <p class="text-xs text-gray-600 mt-1">
+                Scores skills from a short task video using fixed rubrics.
+              </p>
+              <div class="mt-3 text-[11px] text-emerald-700 font-semibold">
+                ✓ Bias-Neutral Kinematics
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl border border-gray-200 bg-gray-50/80 hover:bg-white transition shadow-sm"
+            >
+              <div class="text-xs font-bold text-teal-800 uppercase mb-1">
+                Agent 3
+              </div>
+              <h5 class="font-bold text-gray-900 text-sm">Matching Agent</h5>
+              <p class="text-xs text-gray-600 mt-1">
+                Ranks jobs and explains each match in native local languages.
+              </p>
+              <div class="mt-3 text-[11px] text-emerald-700 font-semibold">
+                ✓ Multi-Factor Radar
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl border border-gray-200 bg-gray-50/80 hover:bg-white transition shadow-sm"
+            >
+              <div class="text-xs font-bold text-teal-800 uppercase mb-1">
+                Agent 4
+              </div>
+              <h5 class="font-bold text-gray-900 text-sm">Consent Agent</h5>
+              <p class="text-xs text-gray-600 mt-1">
+                Asks the worker before sharing details; guards worker privacy.
+              </p>
+              <div class="mt-3 text-[11px] text-emerald-700 font-semibold">
+                ✓ Tokenized Contact Gate
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-900 text-white p-4 rounded-xl shadow mb-6 border border-gray-800"
+          >
+            <div class="flex items-center justify-between">
+              <div>
+                <span
+                  class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold"
+                  >Lifecycle Monitor</span
+                >
+                <h4 class="text-base font-bold">Follow-up Agent</h4>
+                <p class="text-xs text-gray-300 mt-0.5">
+                  Checks in at 30, 60, and 90 days and feeds results back into
+                  matching.
+                </p>
+              </div>
+              <button
+                onclick="switchTab('retention')"
+                class="text-xs bg-gray-800 hover:bg-gray-700 text-amber-300 px-3 py-1.5 rounded font-semibold border border-gray-700"
+              >
+                View Retention Engine →
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="font-bold text-gray-900 text-sm">
+                Real-Time Agent Execution Event Stream
+              </h4>
+              <span class="text-[11px] text-gray-500 font-mono"
+                >Auto-updating</span
+              >
+            </div>
+            <div
+              id="agent-logs-stream"
+              class="space-y-1.5 max-h-96 overflow-y-auto p-2 bg-gray-50 rounded-xl border border-gray-200"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-trust" class="tab-content hidden">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+        >
+          <div
+            class="pb-4 mb-4 border-b border-gray-100 flex items-center justify-between"
+          >
+            <div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded border border-teal-300"
+                  >Slide 5 Architecture</span
+                >
+                <h3 class="text-xl font-black text-gray-900">
+                  Trust and Safety: Built so workers are protected
+                </h3>
+              </div>
+              <p class="text-xs text-gray-500">
+                Four foundational security pillars ensuring rural employment
+                dignity and scam immunity.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="p-4 rounded-xl border border-teal-200 bg-teal-50/40">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-lg">🛡️</span>
+                <h4 class="font-bold text-gray-900 text-sm">
+                  Listings checked first
+                </h4>
+              </div>
+              <p class="text-xs text-gray-700 leading-relaxed">
+                Nothing reaches a worker until it passes verification. Listing
+                Agent audits enterprise credentials, GSTIN/MSME, and wage parity
+                against district statutory minimums.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-lg">🔒</span>
+                <h4 class="font-bold text-gray-900 text-sm">
+                  Consent before sharing
+                </h4>
+              </div>
+              <p class="text-xs text-gray-700 leading-relaxed">
+                Worker details go to an employer only after approval. Phone
+                number and village location are tokenized and protected until
+                the job seeker explicitly authorizes contact.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/40">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-lg">⚖️</span>
+                <h4 class="font-bold text-gray-900 text-sm">Bias control</h4>
+              </div>
+              <p class="text-xs text-gray-700 leading-relaxed">
+                Skill scoring follows a fixed rubric, not appearance. Facial
+                contours, dress, regional dialect, and gender are blinded from
+                the model; scoring is strictly kinematic and task-based.
+              </p>
+            </div>
+
+            <div
+              class="p-4 rounded-xl border border-purple-200 bg-purple-50/40"
+            >
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-lg">👤</span>
+                <h4 class="font-bold text-gray-900 text-sm">
+                  Human in the loop
+                </h4>
+              </div>
+              <p class="text-xs text-gray-700 leading-relaxed">
+                Low-confidence scores and rejected listings get reviewed.
+                Orchestrator automatically escalates borderline videos (dim
+                lighting) or ambiguous wages to human reviewers.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-bold text-gray-900 text-sm">
+                Active Human-in-the-Loop Review Queue
+              </h4>
+              <span class="text-xs text-gray-500">Supervisory Dashboard</span>
+            </div>
+            <div id="human-review-list" class="space-y-3"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-retention" class="tab-content hidden">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+        >
+          <div
+            class="pb-4 mb-4 border-b border-gray-100 flex items-center justify-between"
+          >
+            <div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded border border-teal-300"
+                  >Slide 4 & 7</span
+                >
+                <h3 class="text-xl font-black text-gray-900">
+                  30, 60, and 90-Day Post-Placement Retention Engine
+                </h3>
+              </div>
+              <p class="text-xs text-gray-500">
+                Follow-up Agent monitors wage timeliness, workplace safety, and
+                feeds outcomes back into the matching algorithm.
+              </p>
+            </div>
+            <span
+              class="text-xs font-bold bg-amber-100 text-teal-950 px-3 py-1 rounded-full border border-amber-300"
+            >
+              Solves 40–50% Early Exits
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 text-xs">
+            <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/50">
+              <div class="font-bold text-blue-900 text-sm mb-1">
+                Day 30 Check-in
+              </div>
+              <p class="text-gray-600">
+                Verifies first month salary payment via direct bank transfer and
+                confirms that lodging/work conditions match the verified
+                listing.
+              </p>
+            </div>
+            <div
+              class="p-3 rounded-xl border border-purple-200 bg-purple-50/50"
+            >
+              <div class="font-bold text-purple-900 text-sm mb-1">
+                Day 60 Check-in
+              </div>
+              <p class="text-gray-600">
+                Detects early signs of friction, wage delays, or overtime
+                disputes before they lead to an early exit.
+              </p>
+            </div>
+            <div
+              class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/50"
+            >
+              <div class="font-bold text-emerald-900 text-sm mb-1">
+                Day 90 Check-in
+              </div>
+              <p class="text-gray-600">
+                Confirms permanent retention and upgrades employer & worker
+                trust scores (+5%), boosting future match rankings.
+              </p>
+            </div>
+          </div>
+
+          <div id="followup-timeline-list" class="space-y-3">
+            <!-- Follow-up records injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <section id="view-field" class="tab-content hidden">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 mb-6"
+        >
+          <div class="pb-4 mb-4 border-b border-gray-100">
+            <div class="flex items-center gap-2">
+              <span
+                class="text-xs bg-teal-100 text-teal-900 font-bold px-2 py-0.5 rounded border border-teal-300"
+                >Slide 7</span
+              >
+              <h3 class="text-xl font-black text-gray-900">
+                Learning From the Field Before We Scale
+              </h3>
+            </div>
+            <p class="text-xs text-gray-500">
+              Field inquiry findings, ITI & Panchayat pilot partnerships, and
+              economic impact model.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-3">
+              <h4
+                class="font-bold text-gray-900 text-sm flex items-center gap-2"
+              >
+                <span>📋 Questions We Ask in Field Interviews</span>
+              </h4>
+              <div
+                class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2.5"
+              >
+                <div class="flex items-start gap-2">
+                  <span class="text-teal-800 font-bold">•</span>
+                  <div>
+                    <strong>How did you find your last job?</strong>
+                    (Discovered: 78% relied on middleman agents taking 1st month
+                    salary).
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-teal-800 font-bold">•</span>
+                  <div>
+                    <strong>Why did the last hire leave?</strong> (Discovered:
+                    45% skill mismatch, 35% wage not paid as promised).
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-teal-800 font-bold">•</span>
+                  <div>
+                    <strong>What does an employer check?</strong> (Discovered:
+                    Practical tool handling matters 10x more than paper
+                    diplomas).
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-teal-800 font-bold">•</span>
+                  <div>
+                    <strong>How far, and for what wage?</strong> (Discovered:
+                    Workers prefer &lt;20 km unless free lodging is provided).
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-teal-800 font-bold">•</span>
+                  <div>
+                    <strong>Has a fake listing cheated anyone?</strong>
+                    (Discovered: 32% of youth lost ₹800–₹2,500 in advance
+                    registration fee scams).
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-teal-800 font-bold">•</span>
+                  <div>
+                    <strong>What does a bad hire cost?</strong> (Calculated
+                    below: avg ₹28,000 lost in machine downtime and re-hiring).
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="p-4 rounded-xl bg-teal-50 border border-teal-200 text-xs"
+              >
+                <div class="font-bold text-teal-900 mb-2">
+                  Cost of a Failed Hire to a Rural Employer:
+                </div>
+                <div class="space-y-1 text-gray-700">
+                  <div class="flex justify-between">
+                    <span>Recruitment agent commission:</span>
+                    <strong>₹4,500</strong>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Workshop machine downtime (2 weeks):</span>
+                    <strong>₹16,000</strong>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Supervisor training hours lost:</span>
+                    <strong>₹7,500</strong>
+                  </div>
+                  <div
+                    class="border-t border-teal-200 pt-1 flex justify-between font-bold text-teal-950 text-sm"
+                  >
+                    <span>Total cost of 1 early exit:</span>
+                    <span class="text-red-700">₹28,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <h4 class="font-bold text-gray-900 text-sm">
+                🚀 Next Steps & Pilot Execution
+              </h4>
+              <div class="space-y-3">
+                <div
+                  class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 text-xs"
+                >
+                  <div class="font-bold text-emerald-900 text-sm mb-1">
+                    1. Local Language Voice Support
+                  </div>
+                  <p class="text-gray-600">
+                    Full speech interface in Hindi and Bengali allows
+                    low-literacy rural youth to record skill videos and listen
+                    to job match briefings via voice WhatsApp bots.
+                  </p>
+                </div>
+
+                <div
+                  class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/40 text-xs"
+                >
+                  <div class="font-bold text-blue-900 text-sm mb-1">
+                    2. Pilot with ITIs and Panchayats
+                  </div>
+                  <p class="text-gray-600">
+                    Partnering with Industrial Training Institutes (ITIs) and
+                    Gram Panchayats in Purba Bardhaman & Bankura to provide
+                    village kiosk recording stations and verified employer
+                    empanelment.
+                  </p>
+                </div>
+
+                <div
+                  class="p-3.5 rounded-xl border border-purple-200 bg-purple-50/40 text-xs"
+                >
+                  <div class="font-bold text-purple-900 text-sm mb-1">
+                    3. Automated 30, 60, 90 Day Follow-ups
+                  </div>
+                  <p class="text-gray-600">
+                    Automated interactive voice response (IVR) and WhatsApp
+                    check-in engine feeding directly into the Matching Agent's
+                    employer trust weight.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="bg-[#0e2b31] text-gray-300 text-xs py-6 border-t border-teal-800"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div>
+          <strong class="text-white text-sm">Hunar Setu</strong> — Verified
+          skills. Trusted jobs.
+          <div class="text-gray-400 text-[11px] mt-0.5">
+            Team The Bridge Coders · Jadavpur University
+          </div>
+        </div>
+        <div class="text-center sm:text-right text-gray-400 text-[11px]">
+          Hunar Setu &copy; 2026
+        </div>
+      </div>
+    </footer>
+
+    <script src="/static/js/voice.js"></script>
+    <script src="/static/js/video_demo.js"></script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>
